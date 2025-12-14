@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
 '''
 Update this with this commands:
-git add simulator/phosphene_simulator.py
+git add .
 git commit -m "Add minimal 256-phosphene simulator"
 git push
 '''
