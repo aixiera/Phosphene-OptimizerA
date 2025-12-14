@@ -69,3 +69,10 @@ if __name__ == "__main__":
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+'''
+Update this with this commands:
+git add simulator/phosphene_simulator.py
+git commit -m "Add minimal 256-phosphene simulator"
+git push
+'''
