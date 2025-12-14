@@ -205,3 +205,34 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ================================
+# Phosphene Optimizer (Project-specific)
+# ================================
+
+# Large datasets (do not commit)
+data/
+datasets/
+dataset/
+raw_data/
+
+# Model outputs and checkpoints
+checkpoints/
+models/
+weights/
+outputs/
+
+# Experiment logs
+logs/
+runs/
+wandb/
+
+# Generated visualizations
+results/
+figures/
+videos/
+
+# Temporary files
+tmp/
+cache/
+
