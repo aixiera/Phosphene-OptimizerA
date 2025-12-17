@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 
 
+
 def render_phosphene(
     image,
     grid_size=16,
@@ -9,7 +10,7 @@ def render_phosphene(
     sigma=6
 ):
     """
-    Render a phosphene image from an input RGB image.
+    Render a phosphene image from an input RGB image SYSTEMATICALLY, which is why it is called renderer :)
 
     Args:
         image (np.ndarray): Input RGB image (H, W, 3)

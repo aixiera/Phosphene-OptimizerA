@@ -12,6 +12,11 @@ import torch.nn as nn
 
 from models.cnn_encoder import CNNPhospheneEncoder
 
+'''
+This file trains a neural network to learn how to optimally allocate a fixed number of phosphenes (256)
+so that the resulting perceptual image preserves as much visual structure as possible.
+'''
+
 # Dataset
 class ImageFolderDataset(Dataset):
     def __init__(self, image_dir):
@@ -141,7 +146,10 @@ def train():
         cmap="gray"
     )
 
-    # ---------- heatmap ----------
+    #heatmap
+    #The phosphene activation heatmap represents the learned allocation of limited stimulation resources across the visual field.
+    #Each element corresponds to the intensity of a single phosphene, revealing 
+    #how the encoder prioritizes spatial regions to preserve structural information under severe resolution constraints.
     heatmap = code.view(16, 16).cpu().numpy()
     plt.figure(figsize=(4, 4))
     plt.imshow(heatmap, cmap="inferno")
@@ -151,8 +159,7 @@ def train():
     plt.savefig(os.path.join(EPOCH_DIR, "heatmap.png"), dpi=200)
     plt.close()
 
-
-    # ---------- side-by-side comparison ----------
+    #side-by-side comparison
     fig, axs = plt.subplots(1, 2, figsize=(8, 4))
     axs[0].imshow(original.squeeze().cpu(), cmap="gray")
     axs[0].set_title("Original")
@@ -175,8 +182,4 @@ if __name__ == "__main__":
 '''
 Output using this in the terminal instead of simply running the file: 
 python -m training.train_encoder
-
-In a big picture, this code helps to answer this question:
-Can a neural network learn how to optimally allocate a fixed number of phosphenes (256)
-so that the resulting perceptual image preserves as much visual structure as possible?
 '''

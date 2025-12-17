@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 from baselines.downsample_baseline import downsample_baseline
-from simulator.phosphene_simulator import render_phosphene
+from simulator.phosphene_renderer import render_phosphene
 
 def mse(img1, img2):
     """
