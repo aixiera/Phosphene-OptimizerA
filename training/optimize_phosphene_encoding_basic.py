@@ -172,14 +172,21 @@ def train():
     plt.tight_layout()
     plt.savefig(os.path.join(EPOCH_DIR, "comparison.png"), dpi=200)
     plt.close()
+    os.makedirs("models", exist_ok=True)
+    torch.save(
+        encoder.state_dict(),
+        "models/optimize_encoder_basic.pth"
+    )
 
 
 if __name__ == "__main__":
     train()
+    
+
 
 
 
 '''
 Output using this in the terminal instead of simply running the file: 
-python -m training.train_encoder
+python -m training.optimize_phosphene_encoding_basic
 '''

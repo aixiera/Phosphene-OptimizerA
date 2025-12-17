@@ -1,6 +1,6 @@
 import cv2
 from baselines.downsample_baseline import downsample_baseline
-from simulator.phosphene_simulator import render_phosphene
+from simulator.phosphene_renderer import render_phosphene
 
 image_path = "E:/Semi Study/CLC 12/Normal Pictures/Fanzhendong vs zhangben quarter final.jpg"
 image = cv2.imread(image_path)
