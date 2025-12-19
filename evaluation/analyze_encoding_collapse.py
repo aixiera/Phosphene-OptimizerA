@@ -5,8 +5,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from torchvision import transforms
-from models.cnn_encoder import CNNPhospheneEncoder
-from training.optimize_phosphene_encoding_basic import DifferentiablePhospheneRenderer
+from models.encoder_baseline_cnn import CNNPhospheneEncoder
+from training.learn_encoder_baseline import DifferentiablePhospheneRenderer
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -17,7 +17,7 @@ os.makedirs(RESULT_DIR, exist_ok=True)
 # ---------------- Load model ----------------
 encoder = CNNPhospheneEncoder().to(DEVICE)
 encoder.load_state_dict(
-    torch.load("models/optimize_encoder_basic.pth", map_location=DEVICE)
+    torch.load("models/learn_encoder_baseline.pth", map_location=DEVICE)
 )
 encoder.eval()
 

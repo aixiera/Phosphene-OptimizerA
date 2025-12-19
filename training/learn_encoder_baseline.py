@@ -10,7 +10,7 @@ from torchvision import transforms
 import torch.nn.functional as F
 import torch.nn as nn
 
-from models.cnn_encoder import CNNPhospheneEncoder
+from models.encoder_baseline_cnn import CNNPhospheneEncoder
 
 '''
 This file trains a neural network to learn how to optimally allocate a fixed number of phosphenes (256)
@@ -175,18 +175,13 @@ def train():
     os.makedirs("models", exist_ok=True)
     torch.save(
         encoder.state_dict(),
-        "models/optimize_encoder_basic.pth"
+        "models/learn_encoder_baseline.pth"
     )
-
 
 if __name__ == "__main__":
     train()
     
-
-
-
-
 '''
 Output using this in the terminal instead of simply running the file: 
-python -m training.optimize_phosphene_encoding_basic
+python -m training.learn_encoder_baseline
 '''
