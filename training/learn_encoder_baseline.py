@@ -64,6 +64,43 @@ class DifferentiablePhospheneRenderer(nn.Module):
             padding=self.gaussian_kernel.shape[-1] // 2
         )
         return x
+    
+def render_phosphenes_torch(code, grid_size=16, sigma=6, output_size=256):
+    """Render phosphene images from torch tensors.
+
+    This mirrors :class:`DifferentiablePhospheneRenderer` but exposes a
+    functional interface that can be reused outside of training scripts.
+
+    Args:
+        code (torch.Tensor): Phosphene intensities with shape ``(B, grid_size^2)``
+            or ``(B, 1, grid_size, grid_size)``.
+        grid_size (int): Spatial size of the phosphene grid.
+        sigma (int): Standard deviation for the Gaussian blur kernel.
+        output_size (int): Final rendered image size (square).
+
+    Returns:
+        torch.Tensor: Rendered phosphene images with shape ``(B, 1, output_size, output_size)``.
+    """
+
+    if code.dim() == 2:
+        code = code.view(code.shape[0], 1, grid_size, grid_size)
+    elif code.dim() == 4:
+        assert code.shape[1:] == (1, grid_size, grid_size), "Unexpected code shape"
+    else:
+        raise ValueError(f"Unsupported code shape: {tuple(code.shape)}")
+
+    device = code.device
+    kernel_size = 11
+    ax = torch.arange(kernel_size, device=device) - kernel_size // 2
+    xx, yy = torch.meshgrid(ax, ax, indexing="ij")
+    kernel = torch.exp(-(xx**2 + yy**2) / (2 * sigma**2))
+    kernel = kernel / kernel.sum()
+
+    kernel = kernel.view(1, 1, kernel_size, kernel_size)
+    x = F.interpolate(code, size=(output_size, output_size), mode="nearest")
+    x = F.conv2d(x, kernel, padding=kernel_size // 2)
+    return x
+
 
 # Training + Visualization
 def train():

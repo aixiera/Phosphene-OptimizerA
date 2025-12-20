@@ -216,9 +216,10 @@ datasets/
 dataset/
 raw_data/
 
-# Model outputs and checkpoints
+# Model outputs and checkpoints (allow source code under models/)
 checkpoints/
-models/
+models/**/*.pth
+models/**/*.pt
 weights/
 outputs/
 

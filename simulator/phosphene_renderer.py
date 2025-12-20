@@ -11,13 +11,11 @@ def render_phosphene(
 ):
     """
     Render a phosphene image from an input RGB image SYSTEMATICALLY, which is why it is called renderer :)
-
     Args:
         image (np.ndarray): Input RGB image (H, W, 3)
         grid_size (int): Phosphene grid size (grid_size x grid_size)
         output_size (int): Output image size (output_size x output_size)
         sigma (int): Gaussian blur strength for each phosphene
-
     Returns:
         phosphene_img (np.ndarray): Rendered phosphene image (output_size x output_size)
     """
